@@ -66,7 +66,7 @@ def main():
                              drop_last=True, num_workers=opt.num_workers)
     model = UHDModel(opt)
           
-    trainer = pl.Trainer(max_epochs=opt.epochs,accelerator="gpu",devices=opt.num_gpus,logger=logger,callbacks=[checkpoint_callback])                
+    trainer = pl.Trainer(max_epochs=opt.epochs,accelerator="gpu",devices=opt.num_gpus,strategy="ddp_find_unused_parameters_true",logger=logger,callbacks=[checkpoint_callback])                
     trainer.fit(model, trainloader)
 
 
